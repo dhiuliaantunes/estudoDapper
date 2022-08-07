@@ -7,11 +7,11 @@ namespace eCommerce.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserContribController : ControllerBase
+    public class UsersContribController : ControllerBase
     {
         private readonly IUserContibRepository _repository;
 
-        public UserContribController(IUserContibRepository repository)
+        public UsersContribController(IUserContibRepository repository)
         {
             _repository = repository;
         }

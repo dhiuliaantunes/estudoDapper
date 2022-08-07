@@ -36,17 +36,17 @@ namespace eCommerce.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Insert([FromBody] Usuario user)
+        public async Task<IActionResult> Insert([FromBody] Usuario usuario)
         {
-            var result = await _repository.Insert(user);
+            var result = await _repository.Insert(usuario);
 
             return Ok(result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] Usuario user)
+        public async Task<IActionResult> Update([FromBody] Usuario usuario)
         {
-            var result = await _repository.Update(user);
+            var result = await _repository.Update(usuario);
 
             return Ok(result);
         }

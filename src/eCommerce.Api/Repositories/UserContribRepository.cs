@@ -1,8 +1,10 @@
-﻿using eCommerce.Api.Models;
+﻿using Dapper.Contrib.Extensions;
+using eCommerce.Api.Models;
 using eCommerce.Api.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace eCommerce.Api.Repositories
@@ -16,29 +18,46 @@ namespace eCommerce.Api.Repositories
             _connection = new SqlConnection("Data Source=localhost,1433;Initial Catalog=eCommerce;User ID=sa;Password=#Br@sil10;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
-        public Task<List<Usuario>> Get()
+        public async Task<List<Usuario>> Get()
         {
-            throw new System.NotImplementedException();
+            var result = await _connection.GetAllAsync<Usuario>();
+
+            return result.ToList();
         }
 
-        public Task<Usuario> Get(int id)
+        public async Task<Usuario> Get(int id)
         {
-            throw new System.NotImplementedException();
+            var result = await _connection.GetAsync<Usuario>(id);
+
+            return result;
         }
 
-        public Task<Usuario> Insert(Usuario user)
+        public async Task<Usuario> Insert(Usuario usuario)
         {
-            throw new System.NotImplementedException();
+            var id = await _connection.InsertAsync(usuario);
+
+            usuario.Id = id;
+
+            return usuario;
         }
 
-        public Task<Usuario> Update(Usuario user)
+        public async Task<Usuario> Update(Usuario usuario)
         {
-            throw new System.NotImplementedException();
+            await _connection.UpdateAsync(usuario);
+
+            return usuario;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var usuario = await Get(id);
+
+            if (usuario == null)
+                return false;
+
+            await _connection.DeleteAsync(usuario);
+
+            return true;
         }
     }
 }

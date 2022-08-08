@@ -90,6 +90,27 @@ namespace eCommerce.Api.Repositories
             return usuario.First();
         }
 
+        public async Task<Usuario> GetMultiple(int id)
+        {
+            var query = "SELECT * FROM Usuarios WHERE Id = @id; " +
+                        "SELECT * FROM Contatos WHERE UsuarioId = @id; " +
+                        "SELECT * FROM EnderecosEntrega WHERE UsuarioId = @id; ";
+
+            using var multipleResultSet = await _connection.QueryMultipleAsync(query, new { Id = id });
+
+            var usuario = multipleResultSet.Read<Usuario>().SingleOrDefault();
+            var contato = multipleResultSet.Read<Contato>().SingleOrDefault();
+            var enderecos = multipleResultSet.Read<EnderecoEntrega>().ToList();
+
+            if (usuario != null)
+            {
+                usuario.Contato = contato;
+                usuario.EnderecosEntrega = enderecos;
+            }
+
+            return usuario;
+        }
+
         public async Task<Usuario> Insert(Usuario usuario)
         {
             var result = new Usuario();
@@ -227,5 +248,7 @@ namespace eCommerce.Api.Repositories
 
             return true;
         }
+
+
     }
 }

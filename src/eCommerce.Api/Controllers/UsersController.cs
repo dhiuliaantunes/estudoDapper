@@ -35,6 +35,17 @@ namespace eCommerce.Api.Controllers
             return Ok(user);
         }
 
+        [HttpGet("Multi/{id:int}")]
+        public async Task<IActionResult> GetMultiple(int id)
+        {
+            var user = await _repository.GetMultiple(id);
+
+            if (user == null)
+                return NotFound();
+
+            return Ok(user);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Insert([FromBody] Usuario user)
         {

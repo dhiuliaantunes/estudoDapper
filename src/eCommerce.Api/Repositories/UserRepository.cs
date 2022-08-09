@@ -49,7 +49,6 @@ namespace eCommerce.Api.Repositories
 
             return result;
         }
-
         public async Task<PaginacaoUsuario> GetPaginated(int page, int quantityPerPage)
         {
             var result = new PaginacaoUsuario();

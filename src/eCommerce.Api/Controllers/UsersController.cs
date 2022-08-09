@@ -24,6 +24,15 @@ namespace eCommerce.Api.Controllers
             return Ok(users);
         }
 
+
+        [HttpGet("paginated")]
+        public async Task<IActionResult> GetPaginated([FromQuery] int page, int quantityPerPage)
+        {
+            var users = await _repository.GetPaginated(page, quantityPerPage);
+
+            return Ok(users);
+        }
+
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {

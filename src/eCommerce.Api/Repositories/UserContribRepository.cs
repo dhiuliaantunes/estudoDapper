@@ -15,7 +15,7 @@ namespace eCommerce.Api.Repositories
 
         public UserContribRepository()
         {
-            _connection = new SqlConnection("Data Source=localhost,1433;Initial Catalog=eCommerce;User ID=sa;Password=#Br@sil10;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            _connection = new SqlConnection("Data Source = localhost, 1433; Initial Catalog = dapper; User ID = sa; Password = Password@?2022; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
         }
 
         public async Task<List<Usuario>> Get()

@@ -21,7 +21,7 @@ namespace ECommerce.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserContibRepository, UserContribRepository>();
+            services.AddScoped<IUserContribRepository, UserContribRepository>();
 
             services.AddControllers();
 

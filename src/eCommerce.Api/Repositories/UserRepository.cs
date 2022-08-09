@@ -15,7 +15,7 @@ namespace eCommerce.Api.Repositories
 
         public UserRepository()
         {
-            _connection = new SqlConnection("Data Source=localhost,1433;Initial Catalog=eCommerce;User ID=sa;Password=#Br@sil10;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            _connection = new SqlConnection("Data Source = localhost, 1433; Initial Catalog = dapper; User ID = sa; Password = Password@?2022; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
         }
 
         public async Task<List<Usuario>> Get()
@@ -46,6 +46,38 @@ namespace eCommerce.Api.Repositories
 
                     return usuario;
                 });
+
+            return result;
+        }
+
+        public async Task<PaginacaoUsuario> GetPaginated(int page, int quantityPerPage)
+        {
+            var result = new PaginacaoUsuario();
+
+            var query = $@"SELECT * FROM Usuarios
+                        WHERE 1 = 1 
+                        ORDER BY Id
+                        OFFSET @Offset ROWS
+                        FETCH NEXT @PageSize ROWS ONLY;
+                    
+                        SELECT COUNT(Id) FROM Usuarios";
+
+
+            using var multi = await _connection.QueryMultipleAsync(query,
+                        new
+                        {
+                            Offset = (page - 1) * quantityPerPage,
+                            PageSize = quantityPerPage
+                        });
+
+            var users = multi.Read<Usuario>().ToList();
+
+            result.Items = users;
+            result.Total = multi.ReadFirst<int>();
+            result.Page = page;
+            result.PageSize = quantityPerPage;
+            decimal teste = result.Total / quantityPerPage;
+            //result.TotalPages = Math.Round(teste);
 
             return result;
         }
@@ -247,6 +279,22 @@ namespace eCommerce.Api.Repositories
             await _connection.ExecuteAsync("DELETE FROM Usuarios WHERE Id = @Id", new { Id = id });
 
             return true;
+        }
+
+        public async Task<List<Usuario>> SP_Get()
+        {
+            var usuarios = await _connection.QueryAsync<Usuario>("SelecionarUsuarios", commandType: CommandType.StoredProcedure);
+
+            return usuarios.ToList();
+        }
+
+
+
+        public async Task<Usuario> SP_Get(int id)
+        {
+            var usuario = await _connection.QueryAsync<Usuario>("SelecionarUsuario", new { Id = id }, commandType: CommandType.StoredProcedure);
+
+            return usuario.SingleOrDefault();
         }
 
 

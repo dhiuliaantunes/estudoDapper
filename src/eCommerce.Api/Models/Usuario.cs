@@ -1,16 +1,13 @@
 ﻿using Dapper.Contrib.Extensions;
 using System;
 using System.Collections.Generic;
-using KeyAttribute = Dapper.Contrib.Extensions.KeyAttribute;
 using TableAttribute = Dapper.Contrib.Extensions.TableAttribute;
 
 namespace eCommerce.Api.Models
 {
     [Table("Usuarios")]
-    public class Usuario
+    public class Usuario : Base
     {
-        [Key]
-        public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Sexo { get; set; }

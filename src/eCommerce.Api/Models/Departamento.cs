@@ -2,9 +2,8 @@
 
 namespace eCommerce.Api.Models
 {
-    public class Departamento
+    public class Departamento : Base
     {
-        public int Id { get; set; }
         public string Nome { get; set; }
 
         public ICollection<Usuario> Usuarios { get; set; }

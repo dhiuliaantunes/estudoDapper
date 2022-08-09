@@ -11,6 +11,7 @@ namespace eCommerce.Api.Controllers
     {
         private readonly IUserRepository _repository;
 
+
         public UsersController(IUserRepository repository)
         {
             _repository = repository;
@@ -20,6 +21,14 @@ namespace eCommerce.Api.Controllers
         public async Task<IActionResult> Get()
         {
             var users = await _repository.Get();
+
+            return Ok(users);
+        }
+
+        [HttpGet("paginated")]
+        public async Task<IActionResult> GetPaginated([FromQuery] int page, int quantityPerPage)
+        {
+            var users = await _repository.GetPaginated(page, quantityPerPage);
 
             return Ok(users);
         }
@@ -44,6 +53,23 @@ namespace eCommerce.Api.Controllers
                 return NotFound();
 
             return Ok(user);
+        }
+
+        [HttpGet("SP/GetUsers")]
+        public async Task<IActionResult> SP_Get()
+        {
+            var result = await _repository.SP_Get();
+
+            return Ok(result);
+        }
+
+
+        [HttpGet("SP/GetUser/{id}")]
+        public async Task<IActionResult> SP_Get(int id)
+        {
+            var result = await _repository.SP_Get(id);
+
+            return Ok(result);
         }
 
         [HttpPost]

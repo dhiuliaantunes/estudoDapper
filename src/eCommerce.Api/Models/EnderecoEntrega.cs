@@ -1,8 +1,7 @@
 ﻿namespace eCommerce.Api.Models
 {
-    public class EnderecoEntrega
+    public class EnderecoEntrega : Base
     {
-        public int Id { get; set; }
         public int UsuarioId { get; set; }
         public string NomeEndereco { get; set; }
         public string CEP { get; set; }

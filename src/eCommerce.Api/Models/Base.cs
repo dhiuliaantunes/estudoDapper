@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace eCommerce.Api.Models
+﻿namespace eCommerce.Api.Models
 {
     public class Base
     {
-        [Key]
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
     }
 }

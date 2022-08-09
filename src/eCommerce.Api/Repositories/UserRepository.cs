@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using eCommerce.Api.Models;
 using eCommerce.Api.Repositories.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -75,8 +76,8 @@ namespace eCommerce.Api.Repositories
             result.Total = multi.ReadFirst<int>();
             result.Page = page;
             result.PageSize = quantityPerPage;
-            decimal teste = result.Total / quantityPerPage;
-            //result.TotalPages = Math.Round(teste);
+            double teste = (double)result.Total / quantityPerPage;
+            result.TotalPages = Math.Ceiling(teste);
 
             return result;
         }

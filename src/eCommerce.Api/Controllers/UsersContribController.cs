@@ -9,9 +9,9 @@ namespace eCommerce.Api.Controllers
     [ApiController]
     public class UsersContribController : ControllerBase
     {
-        private readonly IUserContibRepository _repository;
+        private readonly IUserContribRepository _repository;
 
-        public UsersContribController(IUserContibRepository repository)
+        public UsersContribController(IUserContribRepository repository)
         {
             _repository = repository;
         }

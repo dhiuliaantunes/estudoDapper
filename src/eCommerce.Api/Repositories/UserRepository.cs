@@ -76,8 +76,7 @@ namespace eCommerce.Api.Repositories
             result.Total = multi.ReadFirst<int>();
             result.Page = page;
             result.PageSize = quantityPerPage;
-            double teste = (double)result.Total / quantityPerPage;
-            result.TotalPages = Math.Ceiling(teste);
+            result.TotalPages = Math.Ceiling((double)result.Total / quantityPerPage);
 
             return result;
         }

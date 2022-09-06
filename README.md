@@ -16,4 +16,12 @@ Além da utlização dos Extension Methods fornecidos pelo Dapper, a solução t
  
  > 🔌 ConnectionString
  
-A string de conexão é utilizada nas classes 'Repository'. Você pode criar um banco de dados SQL localmente e alterá-la conforme sua base 😃
+A string de conexão é utilizada nas classes 'Repository'. Você pode criar um banco de dados SQL localmente e alterá-la conforme sua base. Na pasta 'scripts' há arquivos SQL para auxiliar na criação e inserção de dados nas tabelas 😃
+
+### Documentação da API
+
+> 💡 O Swagger permite a visualização dos recursos disponibilizados pela API
+
+```bash
+https://localhost:5001/swagger/index.html
+```

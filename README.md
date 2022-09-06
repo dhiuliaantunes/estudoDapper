@@ -16,4 +16,4 @@ Além da utlização dos Extension Methods fornecidos pelo Dapper, a solução t
  
  > 🔌 ConnectionString
  
-A string de conexão é utilizada nas classes 'Repository' você pode criar um banco de dados SQL local e alterá-la conforme sua base 😃
+A string de conexão é utilizada nas classes 'Repository'. Você pode criar um banco de dados SQL localmente e alterá-la conforme sua base 😃
